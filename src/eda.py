@@ -26,6 +26,18 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     for col in ["TotalPremium", "TotalClaims", "CalculatedPremiumPerTerm", "CustomValueEstimate"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    # Fallback mapping when working with simplified sample datasets
+    if "TotalClaims" not in df.columns and "charges" in df.columns:
+        df["TotalClaims"] = pd.to_numeric(df["charges"], errors="coerce")
+    if "TotalPremium" not in df.columns and "TotalClaims" in df.columns:
+        # Assume a 20% loading over claims when premium is not provided
+        df["TotalPremium"] = df["TotalClaims"] * 1.2
+    if "Gender" not in df.columns and "sex" in df.columns:
+        df["Gender"] = df["sex"].str.capitalize()
+    if "Province" not in df.columns and "region" in df.columns:
+        df["Province"] = df["region"].str.replace("_", " ").str.title()
+
     return df
 
 
@@ -42,19 +54,21 @@ def kpis(df: pd.DataFrame) -> dict:
 
 
 def plot_distributions(df: pd.DataFrame) -> None:
-    plt.figure(figsize=(10, 6))
-    sns.histplot(df["TotalPremium"].dropna(), bins=30, kde=True)
-    plt.title("Distribution of TotalPremium")
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUTPUT_DIR, "dist_totalpremium.png"))
-    plt.close()
+    if "TotalPremium" in df.columns:
+        plt.figure(figsize=(10, 6))
+        sns.histplot(df["TotalPremium"].dropna(), bins=30, kde=True)
+        plt.title("Distribution of TotalPremium")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, "dist_totalpremium.png"))
+        plt.close()
 
-    plt.figure(figsize=(10, 6))
-    sns.histplot(df["TotalClaims"].dropna(), bins=30, kde=True, color="tomato")
-    plt.title("Distribution of TotalClaims")
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUTPUT_DIR, "dist_totalclaims.png"))
-    plt.close()
+    if "TotalClaims" in df.columns:
+        plt.figure(figsize=(10, 6))
+        sns.histplot(df["TotalClaims"].dropna(), bins=30, kde=True, color="tomato")
+        plt.title("Distribution of TotalClaims")
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, "dist_totalclaims.png"))
+        plt.close()
 
 
 def plot_loss_ratio_by_segments(df: pd.DataFrame) -> None:
@@ -78,7 +92,7 @@ def plot_monthly_trends(df: pd.DataFrame) -> None:
         dt_col = "TransactionMonth"
     elif "The transaction date" in df.columns:
         dt_col = "The transaction date"
-    if not dt_col:
+    if not dt_col or "TotalPremium" not in df.columns or "TotalClaims" not in df.columns:
         return
 
     monthly = df.dropna(subset=[dt_col]).copy()

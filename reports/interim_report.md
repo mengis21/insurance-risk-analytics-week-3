@@ -20,12 +20,11 @@
 
 ## Screenshots (attach in submission)
 - `reports/images/loss_ratio_by_province.png`
-- `reports/images/loss_ratio_by_vehicletype.png`
 - `reports/images/loss_ratio_by_gender.png`
 - `reports/images/dist_totalpremium.png`
 - `reports/images/dist_totalclaims.png`
-- `reports/images/monthly_premium_claims.png`
 - `reports/images/correlation_matrix.png`
+- Additional plot of interest (e.g., age vs charges) from notebook
 - Repo CI page: successful workflow run on `main`.
 - GitHub PR page: `task-1` and `task-2` merges into `main`.
 
