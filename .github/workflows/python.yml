@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "task-1", "task-2" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run EDA script (smoke)
+        run: |
+          mkdir -p SM/data
+          # Use small synthetic stub if dataset absent in CI
+          if [ ! -f SM/data/insurance.csv ]; then
+            python scripts/ci_stub.py
+          fi
+          python src/eda.py
