@@ -1,0 +1,20 @@
+# Python
+.env/
+venv/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# DVC
+.dvc/
+.dvc/tmp/
+.dvc/cache/
+
+# Data & reports artifacts
+data/
+reports/images/
+
+# Local-only technical samples (do not version)
+Samples-Technical_Content/
