@@ -8,12 +8,11 @@ __pycache__/
 .ipynb_checkpoints/
 
 # DVC
-.dvc/
 .dvc/tmp/
 .dvc/cache/
 
 # Data & reports artifacts
-data/
+/data/
 reports/images/
 
 # Local-only technical samples (do not version)
