@@ -20,6 +20,3 @@ This repository contains the interim deliverables for AlphaCare Insurance Soluti
 
 ## DVC
 - Initialized with a local remote for reproducible data tracking.
-
-## Notes
-- The folder `Samples-Technical_Content/` is excluded from version control.
