@@ -1,0 +1,349 @@
+[
+  {
+    "hypothesis": "H1: Average claim severity differs across provinces.",
+    "segment": "Province",
+    "metric": "TotalClaims",
+    "test": "One-way ANOVA",
+    "decision": "reject",
+    "statistic": 2.9696266935891185,
+    "p_value": 0.0308933560705201,
+    "effect_size": 0.006634016807031266,
+    "interpretation": "Highest observed average severity in KwaZulu-Natal at 14735.",
+    "comparison_summary": [
+      {
+        "Province": "Gauteng",
+        "avg": 12417.575373969232,
+        "median": 8965.79575,
+        "n": 325.0,
+        "sum": 4035711.99654
+      },
+      {
+        "Province": "KwaZulu-Natal",
+        "avg": 14735.41143760989,
+        "median": 9294.131949999999,
+        "n": 364.0,
+        "sum": 5363689.76329
+      },
+      {
+        "Province": "Mpumalanga",
+        "avg": 13406.384516385804,
+        "median": 10057.652025,
+        "n": 324.0,
+        "sum": 4343668.583309
+      },
+      {
+        "Province": "Western Cape",
+        "avg": 12346.937377292308,
+        "median": 8798.593,
+        "n": 325.0,
+        "sum": 4012754.64762
+      }
+    ]
+  },
+  {
+    "hypothesis": "H2: The share of high severity claims varies by province.",
+    "segment": "Province",
+    "metric": "HighSeverityFlag",
+    "test": "Chi-square",
+    "decision": "reject",
+    "statistic": 10.661258515561874,
+    "p_value": 0.013705955663295254,
+    "effect_size": 0.08926396636801594,
+    "interpretation": "National high severity rate 25.04%; provinces above this level require remediation.",
+    "comparison_summary": [
+      {
+        "Province": "Gauteng",
+        "high_severity_rate": 0.2276923076923077
+      },
+      {
+        "Province": "KwaZulu-Natal",
+        "high_severity_rate": 0.3076923076923077
+      },
+      {
+        "Province": "Mpumalanga",
+        "high_severity_rate": 0.25308641975308643
+      },
+      {
+        "Province": "Western Cape",
+        "high_severity_rate": 0.20615384615384616
+      }
+    ]
+  },
+  {
+    "hypothesis": "H3: Claim severity differs across postal codes within provinces.",
+    "segment": "PostalCode",
+    "metric": "TotalClaims",
+    "test": "One-way ANOVA",
+    "decision": "fail_to_reject",
+    "statistic": 1.0590111948295384,
+    "p_value": 0.3908806445629408,
+    "effect_size": 0.011873341825823973,
+    "interpretation": "Postal clusters with persistently higher severity warrant tighter underwriting controls.",
+    "comparison_summary": [
+      {
+        "PostalCode": "1200",
+        "avg": 13727.257139782609,
+        "median": 9618.5036,
+        "n": 92.0,
+        "sum": 1262907.65686
+      },
+      {
+        "PostalCode": "1320",
+        "avg": 12655.468171447368,
+        "median": 9579.679,
+        "n": 76.0,
+        "sum": 961815.58103
+      },
+      {
+        "PostalCode": "1459",
+        "avg": 13895.750988636364,
+        "median": 11500.360975,
+        "n": 88.0,
+        "sum": 1222826.087
+      },
+      {
+        "PostalCode": "1675",
+        "avg": 13178.224388514705,
+        "median": 11218.87452,
+        "n": 68.0,
+        "sum": 896119.258419
+      },
+      {
+        "PostalCode": "1685",
+        "avg": 10597.63428942029,
+        "median": 8310.83915,
+        "n": 69.0,
+        "sum": 731236.76597
+      },
+      {
+        "PostalCode": "2001",
+        "avg": 12458.108396829268,
+        "median": 9765.345275,
+        "n": 82.0,
+        "sum": 1021564.88854
+      },
+      {
+        "PostalCode": "2167",
+        "avg": 13719.15839084507,
+        "median": 8988.15875,
+        "n": 71.0,
+        "sum": 974060.24575
+      },
+      {
+        "PostalCode": "2191",
+        "avg": 12707.282488155339,
+        "median": 8428.0693,
+        "n": 103.0,
+        "sum": 1308850.09628
+      },
+      {
+        "PostalCode": "4001",
+        "avg": 15396.433404303798,
+        "median": 9748.9106,
+        "n": 79.0,
+        "sum": 1216318.23894
+      },
+      {
+        "PostalCode": "4051",
+        "avg": 15474.51007181818,
+        "median": 9304.7019,
+        "n": 99.0,
+        "sum": 1531976.4971099999
+      },
+      {
+        "PostalCode": "4319",
+        "avg": 13857.232483711341,
+        "median": 9386.1613,
+        "n": 97.0,
+        "sum": 1344151.55092
+      },
+      {
+        "PostalCode": "4420",
+        "avg": 14283.63456539326,
+        "median": 8232.6388,
+        "n": 89.0,
+        "sum": 1271243.4763200001
+      },
+      {
+        "PostalCode": "7441",
+        "avg": 10974.421425894738,
+        "median": 7740.337,
+        "n": 95.0,
+        "sum": 1042570.03546
+      },
+      {
+        "PostalCode": "7550",
+        "avg": 11827.360970384616,
+        "median": 7625.8115,
+        "n": 78.0,
+        "sum": 922534.15569
+      },
+      {
+        "PostalCode": "8001",
+        "avg": 13815.556743717949,
+        "median": 10150.241,
+        "n": 78.0,
+        "sum": 1077613.42601
+      },
+      {
+        "PostalCode": "8041",
+        "avg": 13108.60851972973,
+        "median": 9747.781500000001,
+        "n": 74.0,
+        "sum": 970037.03046
+      }
+    ]
+  },
+  {
+    "hypothesis": "H4: Contribution margin differs materially across postal codes.",
+    "segment": "PostalCode",
+    "metric": "Margin",
+    "test": "One-way ANOVA",
+    "decision": "fail_to_reject",
+    "statistic": 1.0590111948295386,
+    "p_value": 0.3908806445629408,
+    "effect_size": 0.011873341825823973,
+    "interpretation": "Lowest contribution margin in postal code 1685 at 2120.",
+    "comparison_summary": [
+      {
+        "PostalCode": "1200",
+        "avg": 2745.4514279565215,
+        "median": 1923.7007199999998,
+        "n": 92.0,
+        "sum": 252581.53137199997
+      },
+      {
+        "PostalCode": "1320",
+        "avg": 2531.093634289473,
+        "median": 1915.9357999999993,
+        "n": 76.0,
+        "sum": 192363.11620599995
+      },
+      {
+        "PostalCode": "1459",
+        "avg": 2779.150197727272,
+        "median": 2300.0721949999997,
+        "n": 88.0,
+        "sum": 244565.21739999994
+      },
+      {
+        "PostalCode": "1675",
+        "avg": 2635.644877702941,
+        "median": 2243.774904,
+        "n": 68.0,
+        "sum": 179223.8516838
+      },
+      {
+        "PostalCode": "1685",
+        "avg": 2119.526857884058,
+        "median": 1662.1678300000003,
+        "n": 69.0,
+        "sum": 146247.353194
+      },
+      {
+        "PostalCode": "2001",
+        "avg": 2491.621679365853,
+        "median": 1953.069054999999,
+        "n": 82.0,
+        "sum": 204312.97770799996
+      },
+      {
+        "PostalCode": "2167",
+        "avg": 2743.8316781690132,
+        "median": 1797.6317500000005,
+        "n": 71.0,
+        "sum": 194812.04914999995
+      },
+      {
+        "PostalCode": "2191",
+        "avg": 2541.4564976310676,
+        "median": 1685.6138599999995,
+        "n": 103.0,
+        "sum": 261770.01925599994
+      },
+      {
+        "PostalCode": "4001",
+        "avg": 3079.2866808607587,
+        "median": 1949.7821199999998,
+        "n": 79.0,
+        "sum": 243263.64778799994
+      },
+      {
+        "PostalCode": "4051",
+        "avg": 3094.9020143636358,
+        "median": 1860.94038,
+        "n": 99.0,
+        "sum": 306395.29942199995
+      },
+      {
+        "PostalCode": "4319",
+        "avg": 2771.4464967422673,
+        "median": 1877.2322599999989,
+        "n": 97.0,
+        "sum": 268830.31018399994
+      },
+      {
+        "PostalCode": "4420",
+        "avg": 2856.7269130786513,
+        "median": 1646.527759999999,
+        "n": 89.0,
+        "sum": 254248.69526399995
+      },
+      {
+        "PostalCode": "7441",
+        "avg": 2194.884285178947,
+        "median": 1548.067399999999,
+        "n": 95.0,
+        "sum": 208514.00709199996
+      },
+      {
+        "PostalCode": "7550",
+        "avg": 2365.4721940769223,
+        "median": 1525.1623000000004,
+        "n": 78.0,
+        "sum": 184506.83113799995
+      },
+      {
+        "PostalCode": "8001",
+        "avg": 2763.111348743589,
+        "median": 2030.0482000000002,
+        "n": 78.0,
+        "sum": 215522.68520199996
+      },
+      {
+        "PostalCode": "8041",
+        "avg": 2621.7217039459456,
+        "median": 1949.5563000000002,
+        "n": 74.0,
+        "sum": 194007.40609199996
+      }
+    ]
+  },
+  {
+    "hypothesis": "H5: Male vs female insured show different claim severity.",
+    "segment": "Gender",
+    "metric": "TotalClaims",
+    "test": "Welch t-test",
+    "decision": "reject",
+    "statistic": -2.1008878232359565,
+    "p_value": 0.03584101495601664,
+    "effect_size": -0.11469311023475946,
+    "interpretation": "Average severity gap between genders is 1387.",
+    "comparison_summary": [
+      {
+        "Gender": "Female",
+        "avg": 12569.578843835347,
+        "median": 9412.9625,
+        "n": 662.0,
+        "sum": 8321061.194619
+      },
+      {
+        "Gender": "Male",
+        "avg": 13956.751177721893,
+        "median": 9369.61575,
+        "n": 676.0,
+        "sum": 9434763.79614
+      }
+    ]
+  }
+]

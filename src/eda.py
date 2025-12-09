@@ -1,47 +1,20 @@
 import os
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+from data_utils import load_enriched_dataset
+
 OUTPUT_DIR = os.path.join("reports", "images")
-DATA_PATH = os.path.join("SM", "data", "insurance.csv")
 
 
 def ensure_output_dir(path: str) -> None:
     os.makedirs(path, exist_ok=True)
 
 
-def load_data(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path)
-    return df
-
-
-def preprocess(df: pd.DataFrame) -> pd.DataFrame:
-    # Parse dates when present
-    for col in ["TransactionMonth", "The transaction date"]:
-        if col in df.columns:
-            df[col] = pd.to_datetime(df[col], errors="coerce")
-    # Normalize numeric types
-    for col in ["TotalPremium", "TotalClaims", "CalculatedPremiumPerTerm", "CustomValueEstimate"]:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors="coerce")
-
-    # Fallback mapping when working with simplified sample datasets
-    if "TotalClaims" not in df.columns and "charges" in df.columns:
-        df["TotalClaims"] = pd.to_numeric(df["charges"], errors="coerce")
-    if "TotalPremium" not in df.columns and "TotalClaims" in df.columns:
-        # Assume a 20% loading over claims when premium is not provided
-        df["TotalPremium"] = df["TotalClaims"] * 1.2
-    if "Gender" not in df.columns and "sex" in df.columns:
-        df["Gender"] = df["sex"].str.capitalize()
-    if "Province" not in df.columns and "region" in df.columns:
-        df["Province"] = df["region"].str.replace("_", " ").str.title()
-
-    return df
-
-
-def kpis(df: pd.DataFrame) -> dict:
+def kpis(df) -> dict:
     total_premium = df["TotalPremium"].sum(min_count=1)
     total_claims = df["TotalClaims"].sum(min_count=1)
     loss_ratio = (total_claims / total_premium) if total_premium and not np.isnan(total_premium) else np.nan
@@ -71,8 +44,8 @@ def plot_distributions(df: pd.DataFrame) -> None:
         plt.close()
 
 
-def plot_loss_ratio_by_segments(df: pd.DataFrame) -> None:
-    for segment in ["Province", "VehicleType", "Gender"]:
+def plot_loss_ratio_by_segments(df) -> None:
+    for segment in ["Province", "PostalCode", "Gender"]:
         if segment in df.columns:
             grp = df.groupby(segment).agg({"TotalPremium": "sum", "TotalClaims": "sum"})
             grp["LossRatio"] = grp["TotalClaims"] / grp["TotalPremium"]
@@ -86,7 +59,7 @@ def plot_loss_ratio_by_segments(df: pd.DataFrame) -> None:
             plt.close()
 
 
-def plot_monthly_trends(df: pd.DataFrame) -> None:
+def plot_monthly_trends(df) -> None:
     dt_col = None
     if "TransactionMonth" in df.columns:
         dt_col = "TransactionMonth"
@@ -108,7 +81,7 @@ def plot_monthly_trends(df: pd.DataFrame) -> None:
     plt.close()
 
 
-def plot_correlations(df: pd.DataFrame) -> None:
+def plot_correlations(df) -> None:
     cols = [c for c in ["TotalPremium", "TotalClaims", "CalculatedPremiumPerTerm", "CustomValueEstimate"] if c in df.columns]
     if not cols:
         return
@@ -123,10 +96,7 @@ def plot_correlations(df: pd.DataFrame) -> None:
 
 def main():
     ensure_output_dir(OUTPUT_DIR)
-    if not os.path.exists(DATA_PATH):
-        raise FileNotFoundError(f"Dataset not found at {DATA_PATH}")
-    df = load_data(DATA_PATH)
-    df = preprocess(df)
+    df, _ = load_enriched_dataset()
     metrics = kpis(df)
 
     # Save KPIs to file
