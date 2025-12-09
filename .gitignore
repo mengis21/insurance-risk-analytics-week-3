@@ -11,9 +11,8 @@ __pycache__/
 .dvc/tmp/
 .dvc/cache/
 
-# Data & reports artifacts
+# Data
 /data/
-reports/images/
 
 # Local-only technical samples (do not version)
 Samples-Technical_Content/
